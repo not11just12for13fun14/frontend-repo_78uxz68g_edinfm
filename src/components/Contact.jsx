@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 export default function Contact() {
   const [status, setStatus] = useState('')
@@ -30,16 +31,32 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative py-20 sm:py-28">
+      <div className="absolute inset-0 bg-[radial-gradient(600px_200px_at_50%_0%,rgba(59,130,246,0.10),transparent)]" />
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-10">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">Contact</h2>
+            <motion.h2
+              initial={{ y: 10, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl sm:text-4xl font-bold text-white tracking-tight"
+            >
+              Contact
+            </motion.h2>
             <p className="mt-3 text-blue-100/80 max-w-xl">Want to collaborate or discuss an idea? Drop a message and I’ll reach out.</p>
             {status && (
               <p className="mt-4 text-blue-200">{status}</p>
             )}
           </div>
-          <form onSubmit={handleSubmit} className="rounded-xl border border-white/10 bg-white/5 p-6">
+          <motion.form
+            onSubmit={handleSubmit}
+            initial={{ y: 16, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+          >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm text-blue-100 mb-1">Name</label>
@@ -55,7 +72,7 @@ export default function Contact() {
               </div>
             </div>
             <button type="submit" className="mt-4 inline-flex items-center justify-center px-5 py-2.5 rounded-md bg-blue-500 hover:bg-blue-600 text-white font-medium transition-colors">Send</button>
-          </form>
+          </motion.form>
         </div>
       </div>
     </section>
